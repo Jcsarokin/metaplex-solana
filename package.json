@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@metaplex-foundation/mpl-token-metadata": "^1.2.4"
+  }
+}
