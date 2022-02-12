@@ -24,6 +24,7 @@ export interface OwnersProps {
 
 interface OwnerList {
   name: String;
+  nftToken: String;
   owner: String;
 }
 
@@ -82,10 +83,11 @@ const Owners = (props: OwnersProps) => {
           if (Object.prototype.hasOwnProperty.call(data, 'parsed')) {
             let parsed = JSON.parse(JSON.stringify(data))['parsed'];
             let owner = parsed.info.owner;
-            console.log(owner);
+            let nftToken = parsed.info.mint;
             if (owner) {
               result.push({
                 owner,
+                nftToken,
                 name
               });
               setOwnerList([...result]);
@@ -108,6 +110,7 @@ const Owners = (props: OwnersProps) => {
         <TableHead>
           <TableRow>
             <TableCell>NFT Name</TableCell>
+            <TableCell>NFT Token</TableCell>
             <TableCell align="right">Owner</TableCell>
           </TableRow>
         </TableHead>
@@ -117,13 +120,16 @@ const Owners = (props: OwnersProps) => {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
+              <TableCell>
+                {row.nftToken}
+              </TableCell>
               <TableCell align="right">{row.owner}</TableCell>
             </TableRow>
           ))}
           {ownerList.length == 0 && 
             <TableRow>
-              <TableCell align="center" colSpan={2} scope="row">
-                No data
+              <TableCell align="center" colSpan={3} scope="row">
+                Loading...
               </TableCell>
             </TableRow>
           }
