@@ -1,6 +1,9 @@
 {
   "name": "web",
   "version": "0.1.0",
+  "engines": {
+    "yarn": "1.22.17"
+  },
   "dependencies": {
     "@ant-design/icons": "^4.4.0",
     "@babel/preset-typescript": "^7.12.13",

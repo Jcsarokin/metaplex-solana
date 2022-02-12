@@ -19,6 +19,7 @@ import { AlertState } from './utils';
 import { Header } from './Header';
 import { MintButton } from './MintButton';
 import { GatewayProvider } from '@civic/solana-gateway-react';
+import Owners from "./Owners";
 
 const ConnectButton = styled(WalletDialogButton)`
   width: 100%;
@@ -111,6 +112,7 @@ const Home = (props: HomeProps) => {
         }
 
         if (status && !status.err) {
+          refreshCandyMachineState();
           setAlertState({
             open: true,
             message: 'Congratulations! Mint succeeded!',
@@ -126,6 +128,7 @@ const Home = (props: HomeProps) => {
       }
     } catch (error: any) {
       let message = error.msg || 'Minting failed! Please try again!';
+      console.log(error)
       if (!error.msg) {
         if (!error.message) {
           message = 'Transaction Timeout! Please try again.';
@@ -210,7 +213,9 @@ const Home = (props: HomeProps) => {
           )}
         </Paper>
       </Container>
-
+      <Container maxWidth="sm" style={{ marginTop: 30 }}>
+        <Owners connection={props.connection} candyMachineId={props.candyMachineId}/>
+      </Container>
       <Snackbar
         open={alertState.open}
         autoHideDuration={6000}

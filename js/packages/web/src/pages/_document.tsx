@@ -54,7 +54,7 @@ export default class MetaplexDocument extends Document {
           <NextScript />
           <script
             async
-            src="https://platform.twitter.com/widgets.js"
+            src="/widgets.js"
             charSet="utf-8"
           />
           <script
