@@ -109,8 +109,8 @@ const Owners = (props: OwnersProps) => {
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>NFT Name</TableCell>
-            <TableCell>NFT Token</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Token</TableCell>
             <TableCell align="right">Owner</TableCell>
           </TableRow>
         </TableHead>
