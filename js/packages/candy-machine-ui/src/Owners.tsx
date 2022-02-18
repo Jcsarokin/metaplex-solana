@@ -111,7 +111,7 @@ const Owners = (props: OwnersProps) => {
 
   return (<>
     <div style={{textAlign: "right", marginBottom: 20}}>
-      <TextField type="search" id="standard-required" label="Search NFT" value={search} onChange={handleChange}/>
+      <TextField style={{minWidth: 400}} type="search" id="standard-required" label="Search by Attribute or Owner Address" value={search} onChange={handleChange}/>
     </div>
     <TableContainer component={Paper}>
       <Table aria-label="simple table">
@@ -123,7 +123,7 @@ const Owners = (props: OwnersProps) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {ownerList.length > 0 && ownerList.filter(row => row.name.includes(search)).map((row, i) => (
+          {ownerList.length > 0 && ownerList.filter(row => (row.name.includes(search) || row.owner.toLowerCase().includes(search.toLowerCase()))).map((row, i) => (
             <TableRow key={i}>
               <TableCell component="th" scope="row">
                 {row.name}
