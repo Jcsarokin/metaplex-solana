@@ -4,7 +4,7 @@ import * as anchor from '@project-serum/anchor';
 import { Metadata } from '@metaplex-foundation/mpl-token-metadata';
 import bs58 from 'bs58';
 
-import { Paper, TableContainer, Table, TableRow, TableHead, TableBody, TableCell } from '@material-ui/core';
+import { TextField, Paper, TableContainer, Table, TableRow, TableHead, TableBody, TableCell } from '@material-ui/core';
 
 import { getCandyMachineCreator, TOKEN_METADATA_PROGRAM_ID } from './candy-machine';
 
@@ -31,6 +31,7 @@ interface OwnerList {
 const Owners = (props: OwnersProps) => {
 
   const [ownerList, setOwnerList] = useState<OwnerList[]>([]);
+  const [search, setSearch] = useState<string>("");
 
   const { connection, candyMachineId } = props;
 
@@ -104,7 +105,14 @@ const Owners = (props: OwnersProps) => {
     getList();
   }, []);
 
-  return (
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  }
+
+  return (<>
+    <div style={{textAlign: "right", marginBottom: 20}}>
+      <TextField type="search" id="standard-required" label="Search NFT" value={search} onChange={handleChange}/>
+    </div>
     <TableContainer component={Paper}>
       <Table aria-label="simple table">
         <TableHead>
@@ -115,7 +123,7 @@ const Owners = (props: OwnersProps) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {ownerList.length > 0 && ownerList.map((row, i) => (
+          {ownerList.length > 0 && ownerList.filter(row => row.name.includes(search)).map((row, i) => (
             <TableRow key={i}>
               <TableCell component="th" scope="row">
                 {row.name}
@@ -136,7 +144,7 @@ const Owners = (props: OwnersProps) => {
         </TableBody>
       </Table>
     </TableContainer>
-  );
+  </>);
 };
 
 export default Owners;
