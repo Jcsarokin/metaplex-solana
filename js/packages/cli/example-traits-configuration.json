@@ -2,7 +2,9 @@
   "name": "",
   "symbol": "",
   "description": "",
-  "creators": [],
+  "creators": [
+    { "address": "6k4yQukdKGEtiYaecgHvT7YooN8ZUnhpm5cqVept4Bcw", "share": 100 }
+  ],
   "collection": {},
   "premadeCustoms": [
     {

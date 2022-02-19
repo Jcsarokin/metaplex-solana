@@ -36,7 +36,7 @@ const Owners = (props: OwnersProps) => {
   const { connection, candyMachineId } = props;
 
   const getMintAddresses = async (firstCreatorAddress: anchor.web3.PublicKey) => {
-    const metadataAccounts = await connection.getProgramAccounts(
+      const metadataAccounts = await connection.getProgramAccounts(
       TOKEN_METADATA_PROGRAM_ID,
       {
         // The mint address is located at byte 33 and lasts for 32 bytes.
@@ -57,8 +57,7 @@ const Owners = (props: OwnersProps) => {
       },
     );
 
-    return metadataAccounts.map(metadataAccountInfo =>
-      bs58.encode(metadataAccountInfo.account.data),
+    return metadataAccounts.map(metadataAccountInfo => bs58.encode(metadataAccountInfo.account.data)
     );
   };
 
@@ -68,20 +67,24 @@ const Owners = (props: OwnersProps) => {
       let result = ownerList;
       const candyMachineCreator = await getCandyMachineCreator(candyMachineId);
       getMintAddresses(candyMachineCreator[0]).then(async res => {
+        // console.log(res);
         await res.map(async addr => {
           const largestAccounts = await connection.getTokenLargestAccounts(
             new anchor.web3.PublicKey(addr),
             );
+          console.log(largestAccounts)
+          let data;
+          if(largestAccounts.value.length > 0) {
             const largestAccountInfo = await connection.getParsedAccountInfo(
               largestAccounts.value[0].address,
               );
-              let data = largestAccountInfo.value?.data;
-              
+              data = largestAccountInfo.value?.data;
+              }
             const metadataPDA = await Metadata.getPDA(new anchor.web3.PublicKey(addr));
             const tokenMetadata = await Metadata.load(connection, metadataPDA);
             let name = tokenMetadata.data.data.name;
-
-          if (Object.prototype.hasOwnProperty.call(data, 'parsed')) {
+              console.log(tokenMetadata)
+          if (data && Object.prototype.hasOwnProperty.call(data, 'parsed')) {
             let parsed = JSON.parse(JSON.stringify(data))['parsed'];
             let owner = parsed.info.owner;
             let nftToken = parsed.info.mint;
@@ -95,6 +98,8 @@ const Owners = (props: OwnersProps) => {
             }
           }
         });
+      }).catch((err) => {
+        console.log(err, '-----------------')
       });
     }
   },
