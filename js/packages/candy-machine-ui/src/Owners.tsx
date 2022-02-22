@@ -120,13 +120,6 @@ const Owners = (props: OwnersProps) => {
             );
             // console.log(largestAccounts.value[0].address, metadataAccountInfo.pubkey, metadataAccountInfo.account)
 
-            await new Promise((resolve, reject) => {
-              setTimeout(() => {
-                resolve(true);
-                reject(true);
-              }, 500);
-            });
-
             let data;
             if (largestAccounts.value.length > 0) {
               const largestAccountInfo = await connection.getParsedAccountInfo(
@@ -134,12 +127,7 @@ const Owners = (props: OwnersProps) => {
               );
               data = largestAccountInfo.value?.data;
             }
-            await new Promise((resolve, reject) => {
-              setTimeout(() => {
-                resolve(true);
-                reject(true);
-              }, 500);
-            });
+           
             if (data && Object.prototype.hasOwnProperty.call(data, 'parsed')) {
               let parsed = JSON.parse(JSON.stringify(data))['parsed'];
               let owner = parsed.info.owner;
