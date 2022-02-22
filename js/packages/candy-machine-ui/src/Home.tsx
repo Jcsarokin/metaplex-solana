@@ -213,7 +213,7 @@ const Home = (props: HomeProps) => {
           )}
         </Paper>
       </Container>
-      <Container maxWidth="md" style={{ marginTop: 30 }}>
+      <Container maxWidth="lg" style={{ marginTop: 30 }}>
         <Owners connection={props.connection} candyMachineId={props.candyMachineId}/>
       </Container>
       <Snackbar
