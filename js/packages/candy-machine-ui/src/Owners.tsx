@@ -119,6 +119,14 @@ const Owners = (props: OwnersProps) => {
               new anchor.web3.PublicKey(addr),
             );
             // console.log(largestAccounts.value[0].address, metadataAccountInfo.pubkey, metadataAccountInfo.account)
+
+            await new Promise((resolve, reject) => {
+              setTimeout(() => {
+                resolve(true);
+                reject(true);
+              }, 50);
+            });
+
             let data;
             if (largestAccounts.value.length > 0) {
               const largestAccountInfo = await connection.getParsedAccountInfo(
