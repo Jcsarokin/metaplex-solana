@@ -124,7 +124,7 @@ const Owners = (props: OwnersProps) => {
               setTimeout(() => {
                 resolve(true);
                 reject(true);
-              }, 50);
+              }, 100);
             });
 
             let data;
@@ -134,7 +134,12 @@ const Owners = (props: OwnersProps) => {
               );
               data = largestAccountInfo.value?.data;
             }
-
+            await new Promise((resolve, reject) => {
+              setTimeout(() => {
+                resolve(true);
+                reject(true);
+              }, 100);
+            });
             if (data && Object.prototype.hasOwnProperty.call(data, 'parsed')) {
               let parsed = JSON.parse(JSON.stringify(data))['parsed'];
               let owner = parsed.info.owner;
