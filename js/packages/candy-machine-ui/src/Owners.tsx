@@ -124,7 +124,7 @@ const Owners = (props: OwnersProps) => {
               setTimeout(() => {
                 resolve(true);
                 reject(true);
-              }, 100);
+              }, 500);
             });
 
             let data;
@@ -138,7 +138,7 @@ const Owners = (props: OwnersProps) => {
               setTimeout(() => {
                 resolve(true);
                 reject(true);
-              }, 100);
+              }, 500);
             });
             if (data && Object.prototype.hasOwnProperty.call(data, 'parsed')) {
               let parsed = JSON.parse(JSON.stringify(data))['parsed'];
